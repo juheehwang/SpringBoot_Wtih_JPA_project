@@ -48,10 +48,10 @@ public class OrderService {
     public void cancelOrder(Long orderId) {
         orderRepository.findOne(orderId).cancel();
     }
+//
+//    public List<Order> findOrders(OrderSearch orderSearch){
+//        return orderRepository.findAll(orderSearch);
+//}
 
-    public List<Order> findOrders(OrderSearch orderSearch){
-        return orderRepository.findAll(orderSearch);
-}
 
-    public
 }
