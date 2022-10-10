@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.jpashop.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@BatchSize(size = 100)
 public class OrderItem {
 
     @Id @GeneratedValue

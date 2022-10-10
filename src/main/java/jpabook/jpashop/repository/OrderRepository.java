@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -98,7 +99,7 @@ public class OrderRepository {
         return em.createQuery(
                 "select o from Order o" +
                         " join fetch o.member m" +
-                        " join fetch o.deliver d",Order.class
+                        " join fetch o.delivery d",Order.class
         ).getResultList();
     }
 
@@ -112,4 +113,24 @@ public class OrderRepository {
     }
 
 
+    public List<Order> findAllByWithItem() {
+        return em.createQuery(
+                "select distinct o from Order o"+
+                        " join fetch o.member m"+
+                        " join fetch o.delivery d"+
+                        " join fetch o.orderItem oi"+
+                        " join fetch oi.item i",Order.class
+        ).getResultList();
+    }
+
+    public List<Order> findAllWithMemberDeliver(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d",Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+
+    }
 }
